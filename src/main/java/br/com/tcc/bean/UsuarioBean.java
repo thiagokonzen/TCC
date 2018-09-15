@@ -83,6 +83,7 @@ public class UsuarioBean implements Serializable {
 			pessoas = pessoaDAO.listar("nome");
 			
 			Messages.addGlobalInfo(Faces.getResourceBundle("msg").getString("usuarioSalvo"));
+			//Messages.addGlobalInfo("Usuario salvo");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o usuário");
 			erro.printStackTrace();

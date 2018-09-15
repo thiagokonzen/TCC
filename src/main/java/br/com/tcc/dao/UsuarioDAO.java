@@ -29,5 +29,5 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 		} finally {
 			sessao.close();
 		}
-	}
+	} 
 }
