@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -51,7 +52,7 @@ public class FuncionarioBean implements Serializable {
 	public void listar() {
 		try {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-			funcionarios = funcionarioDAO.listar("nome");
+			funcionarios = funcionarioDAO.listar("carteiraTrabalho");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar listar os funcionários");
 			erro.printStackTrace();
@@ -69,24 +70,55 @@ public class FuncionarioBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void salvar() {
 		try {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			funcionarioDAO.merge(funcionario);
-			
+
 			funcionario = new Funcionario();
-			funcionarios = funcionarioDAO.listar("nome");
-			
+			funcionarios = funcionarioDAO.listar("carteiraTrabalho");
+
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoas = pessoaDAO.listar("nome");
-			
-			//Messages.addGlobalInfo(Faces.getResourceBundle("msg").getString("usuarioSalvo"));
-			Messages.addGlobalInfo("Funcionário salvo");
+
+			// Messages.addGlobalInfo(Faces.getResourceBundle("msg").getString("usuarioSalvo"));
+			Messages.addGlobalInfo("Funcionário salvo com sucesso");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar o funcionario");
 			erro.printStackTrace();
 		}
+	}
+
+	public void excluir(ActionEvent evento) {
+		try {
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcionarioSelecionada");
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+			funcionarioDAO.excluir(funcionario);
+			// ClienteDAO clienteDAO = new ClienteDAO();
+			// clienteDAO.excluir(cliente);
+			funcionarios = funcionarioDAO.listar();
+			// clientes = clienteDAO.listar();
+
+			Messages.addGlobalInfo("Funcionário removido com sucesso");
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar remover um funcionário");
+			erro.printStackTrace();
+		}
+
+	}
+
+	public void editar(ActionEvent evento) {
+		try {
+			funcionario = (Funcionario) evento.getComponent().getAttributes().get("funcionarioSelecionada");
+
+			PessoaDAO pessoaDAO = new PessoaDAO();
+			pessoas = pessoaDAO.listar("nome");
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar remover um funcionário");
+			erro.printStackTrace();
+		}
+
 	}
 
 }
