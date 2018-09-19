@@ -136,11 +136,11 @@ public class ProdutoBean implements Serializable {
 
 			String caminho = Faces.getRealPath("/reports/produtos.jasper");
 			
-			String caminhoBanner = Faces.getRealPath("/resources/images/banner.jpg");
+			/*String caminhoBanner = Faces.getRealPath("/resources/images/banner.jpg");*/
 
 			Map<String, Object> parametros = new HashMap<>();
 			
-			parametros.put("CAMINHO_BANNER", caminhoBanner);
+		/*	parametros.put("CAMINHO_BANNER", caminhoBanner);*/
 			
 			if (proDescricao == null) {
 				parametros.put("PRODUTO_DESCRICAO", "%%");
