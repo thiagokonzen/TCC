@@ -1,7 +1,11 @@
 package br.com.tcc.bean;
 
-
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +17,8 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 import br.com.tcc.dao.FabricanteDAO;
 import br.com.tcc.dao.ProdutoDAO;
@@ -28,10 +34,10 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 @ManagedBean
 @ViewScoped
 public class ProdutoBean implements Serializable {
-	private Produto  produto;
+	private Produto produto;
 	private List<Produto> produtos;
 	private List<Fabricante> fabricantes;
-	
+
 	public Produto getProduto() {
 		return produto;
 	}
@@ -66,7 +72,7 @@ public class ProdutoBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void novo() {
 		try {
 			produto = new Produto();
@@ -78,8 +84,8 @@ public class ProdutoBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
-	public void editar(ActionEvent evento){
+
+	public void editar(ActionEvent evento) {
 		try {
 			produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 
@@ -88,13 +94,17 @@ public class ProdutoBean implements Serializable {
 		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar selecionar um produto");
 			erro.printStackTrace();
-		}	
+		}
 	}
-	
+
 	public void salvar() {
 		try {
 			ProdutoDAO produtoDAO = new ProdutoDAO();
-			produtoDAO.merge(produto);
+			Produto produtoRetorno = produtoDAO.merge(produto);
+			
+			Path origem = Paths.get(produto.getCaminho());
+			Path destino = Paths.get("C:/Desenvolvimento/Uploads/" + produtoRetorno.getCodigo() + ".png");
+			Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING);
 
 			produto = new Produto();
 
@@ -104,7 +114,7 @@ public class ProdutoBean implements Serializable {
 			produtos = produtoDAO.listar();
 
 			Messages.addGlobalInfo("Produto salvo com sucesso");
-		} catch (RuntimeException erro) {
+		} catch (RuntimeException | IOException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro ao tentar salvar o produto");
 			erro.printStackTrace();
 		}
@@ -125,7 +135,21 @@ public class ProdutoBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
+	public void upload(FileUploadEvent evento) {
+		try {
+			UploadedFile arquivoUpload = evento.getFile();
+			Path arquivoTemp = Files.createTempFile(null, null);
+			Files.copy(arquivoUpload.getInputstream(), arquivoTemp, StandardCopyOption.REPLACE_EXISTING);
+			produto.setCaminho(arquivoTemp.toString());
+			System.out.println(produto.getCaminho());
+			Messages.addGlobalInfo("Upload realizado com sucesso");
+		} catch (IOException erro) {
+			Messages.addGlobalInfo("Ocorreu um erro ao tentar realizar o upload de arquivo");
+			erro.printStackTrace();
+		}
+	}
+
 	public void imprimir() {
 		try {
 			DataTable tabela = (DataTable) Faces.getViewRoot().findComponent("formListagem:tabela");
@@ -135,13 +159,12 @@ public class ProdutoBean implements Serializable {
 			String fabDescricao = (String) filtros.get("fabricante.descricao");
 
 			String caminho = Faces.getRealPath("/reports/produtos.jasper");
-			
-			/*String caminhoBanner = Faces.getRealPath("/resources/images/banner.jpg");*/
+
+			//String caminhoBanner = Faces.getRealPath("/resources/images/banner.jgp");
 
 			Map<String, Object> parametros = new HashMap<>();
-			
-		/*	parametros.put("CAMINHO_BANNER", caminhoBanner);*/
-			
+			//parametros.put("CAMINHO_BANNER", caminhoBanner);
+
 			if (proDescricao == null) {
 				parametros.put("PRODUTO_DESCRICAO", "%%");
 			} else {

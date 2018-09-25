@@ -39,12 +39,7 @@ ORDER BY tcc.produto.descricao DESC,
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="74" splitType="Stretch">
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="65" y="10" width="424" height="64" uuid="a21296cf-5947-4847-b1aa-fcecab692aa6"/>
-				<imageExpression><![CDATA["src/main/webapp/resources/images/banner.jpg"]]></imageExpression>
-			</image>
-		</band>
+		<band height="74" splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band height="42" splitType="Stretch">
