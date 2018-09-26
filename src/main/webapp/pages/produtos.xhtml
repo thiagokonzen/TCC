@@ -49,7 +49,7 @@
 				</p:column>
 				
 				<p:column headerText="Foto">
-					<p:graphicImage cache="false" height="50" width="50" url="http://localhost:8080/Uploads/#{produto.codigo}.png" />
+					<p:graphicImage cache="false" height="50" width="50" url="C:/Desenvolvimento/Uploads/#{produto.codigo}.png" />
 				</p:column>
 
 				<p:column headerText="Opções">
@@ -89,7 +89,7 @@
 	</h:form>
 
 	<p:dialog header="Produtos - Cadastro" widgetVar="dialogo"
-		draggable="false" resizable="false" modal="true" closable="false">
+		draggable="true" resizable="false" modal="true" closable="false">
 		<h:form id="formCadastro" enctype="multipart/form-data">
 			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel for="descricao" value="Descrição:" />
@@ -133,7 +133,7 @@
 					update=":mensagem :formCadastro:foto" auto="true" />
 				
 				<p:outputLabel for="foto" value="Foto:" />
-				<p:graphicImage id="foto" value="#{imagemBean.foto}">
+				<p:graphicImage id="foto" value="#{imagemBean.foto}" width="200" height="200">
 					<f:param name="caminho" value="#{produtoBean.produto.caminho}" />
 				</p:graphicImage>
 			</h:panelGrid>
