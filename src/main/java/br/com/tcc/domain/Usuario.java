@@ -50,6 +50,8 @@ public class Usuario extends GenericDomain {
 	public Boolean getAtivo() {
 		return ativo;
 	}
+	
+	
 
 	@Transient
 	public String getAtivoFormatado() {
@@ -81,5 +83,7 @@ public class Usuario extends GenericDomain {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+
+	
 
 }
