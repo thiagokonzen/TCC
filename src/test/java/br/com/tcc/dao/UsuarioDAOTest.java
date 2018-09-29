@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import br.com.tcc.domain.Pessoa;
 import br.com.tcc.domain.Usuario;
-import br.com.tcc.enumeracao.TipoUsuario;
 
 public class UsuarioDAOTest {
 
@@ -28,7 +27,7 @@ public class UsuarioDAOTest {
 		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCriptografia());
 		usuario.setSenha(hash.toHex());
 
-		usuario.setTipoUsuario(TipoUsuario.ADMINISTRADOR);
+		usuario.setTipo('A');
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
@@ -39,7 +38,7 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void autenticar(){
-		String cpf = "000.000.000-00";
+		String cpf = "111.111.111-11";
 		String senha = "123456";
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();

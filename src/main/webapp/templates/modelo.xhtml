@@ -6,8 +6,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<ui:insert name="metadata" />
-
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>TCC</title>
@@ -29,7 +27,8 @@
 						<p:menuitem value="Sair" />
 					</p:submenu>
 
-					<p:submenu label="Cadastros">
+					<p:submenu label="Cadastros"
+					 >	
 						<p:menuitem value="Estado" url="/pages/estados.xhtml" />
 						<p:menuitem value="Cidade" url="/pages/cidades.xhtml" />
 						<p:menuitem value="Fabricante" url="/pages/fabricantes.xhtml" />

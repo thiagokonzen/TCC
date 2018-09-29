@@ -44,7 +44,7 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{clienteBean.excluir}"
-							update=":mensagem :formListagem:tabela">
+							update=":mensagem :formListagem:tabela" >
 							<p:confirm header="Confirmação"
 								message="Deseja excluir o cliente?" icon="ui-icon-alert" />
 							<f:attribute name="clienteSelecionada" value="#{cliente}" />

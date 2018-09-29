@@ -9,14 +9,12 @@ import javax.faces.bean.SessionScoped;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.model.menu.MenuModel;
 
 import br.com.tcc.dao.UsuarioDAO;
 import br.com.tcc.domain.Pessoa;
 import br.com.tcc.domain.Usuario;
-import br.com.tcc.enumeracao.TipoUsuario;
 
-@SuppressWarnings("unused")
+
 @ManagedBean
 @SessionScoped
 public class AutenticacaoBean {
@@ -42,7 +40,7 @@ public class AutenticacaoBean {
 	@PostConstruct
 	public void iniciar() {
 		usuario = new Usuario();
-		usuario.setPessoa(new Pessoa());	
+		usuario.setPessoa(new Pessoa());
 	}
 
 	public void autenticar() {
@@ -62,14 +60,13 @@ public class AutenticacaoBean {
 		}
 	}
 	
-//	public boolean temPermissoes(List<String> permissoes){	
-//		for(String permissao : permissoes){
-//			if(usuarioLogado.getTipo() == permissao.charAt(0)){
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
-	
-}
+	public boolean temPermissoes(List<String> permissoes){		
+		for(String permissao : permissoes){
+			if(usuarioLogado.getTipo() == permissao.charAt(0)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+}	
