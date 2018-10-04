@@ -33,7 +33,7 @@ public class VendaBean implements Serializable {
 	private List<ItemVenda> itensVenda;
 	private List<Cliente> clientes;
 	private List<Funcionario> funcionarios;
-	
+
 	private List<Venda> vendas;
 
 	public Venda getVenda() {
@@ -75,14 +75,15 @@ public class VendaBean implements Serializable {
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-	
+
 	public List<Venda> getVendas() {
 		return vendas;
 	}
-	
+
 	public void setVendas(List<Venda> vendas) {
 		this.vendas = vendas;
 	}
+
 	@PostConstruct
 	public void novo() {
 		try {
@@ -98,11 +99,11 @@ public class VendaBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
-	/*public void listar(){
+
+	public void listar() {
 		VendaDAO vendaDAO = new VendaDAO();
 		vendas = vendaDAO.listar("horario");
-	}*/
+	}
 
 	public void adicionar(ActionEvent evento) {
 		Produto produto = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
@@ -129,14 +130,15 @@ public class VendaBean implements Serializable {
 
 		calcular();
 	}
-	
-/*	public void atualizarPrecoParcial(){
-		for(ItemVenda itemVenda : this.itensVenda){
-			itemVenda.setPrecoParcial(itemVenda.getProduto().getPreco().multiply(new BigDecimal(itemVenda.getQuantidade())));
+
+	public void atualizarPrecoParcial() {
+		for (ItemVenda itemVenda : this.itensVenda) {
+			itemVenda.setPrecoParcial(
+					itemVenda.getProduto().getPreco().multiply(new BigDecimal(itemVenda.getQuantidade())));
 		}
 		this.calcular();
-	}*/
-	
+	}
+
 	public void remover(ActionEvent evento) {
 		ItemVenda itemVenda = (ItemVenda) evento.getComponent().getAttributes().get("itemSelecionado");
 
@@ -168,7 +170,7 @@ public class VendaBean implements Serializable {
 			venda.setHorario(new Date());
 			venda.setCliente(null);
 			venda.setFuncionario(null);
-			
+
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 			funcionarios = funcionarioDAO.listarOrdenado();
 
@@ -182,14 +184,14 @@ public class VendaBean implements Serializable {
 
 	public void salvar() {
 		try {
-			if(venda.getPrecoTotal().signum() == 0){
+			if (venda.getPrecoTotal().signum() == 0) {
 				Messages.addGlobalError("Informe pelo menos um item para a venda");
 				return;
 			}
-			
+
 			VendaDAO vendaDAO = new VendaDAO();
 			vendaDAO.salvar(venda, itensVenda);
-			
+
 			venda = new Venda();
 			venda.setPrecoTotal(new BigDecimal("0.00"));
 
@@ -197,7 +199,7 @@ public class VendaBean implements Serializable {
 			produtos = produtoDAO.listar("descricao");
 
 			itensVenda = new ArrayList<>();
-			
+
 			Messages.addGlobalInfo("Venda realizada com sucesso");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao tentar salvar a venda");

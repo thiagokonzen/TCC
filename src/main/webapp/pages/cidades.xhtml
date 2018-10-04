@@ -39,7 +39,7 @@
 					<p:column headerText="Opções">
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{cidadeBean.excluir}"
-							update=":mensagem :formListagem:tabela" rendered="#{autenticacaoBean.temPermissoes(['G'])}">
+							update=":mensagem :formListagem:tabela" >
 							<p:confirm header="Confirmação" message="Deseja excluir a cidade"
 								icon="ui-icon-alert" />
 							<f:attribute name="cidadeSelecionada" value="#{cidade}" />

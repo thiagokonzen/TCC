@@ -15,7 +15,7 @@
 		</resource-bundle>
 	</application>
 
-  	<lifecycle> 
+    	<lifecycle>
 		<phase-listener>br.com.tcc.util.AutenticacaoListener</phase-listener> 
 	</lifecycle> 
 </faces-config>
