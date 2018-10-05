@@ -18,6 +18,9 @@
 					<f:facet name="header">
 						<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
 							actionListener="#{estadoBean.novo}" update=":formCadastro:painel" />
+							
+						<p:commandButton icon="ui-icon-print"
+						actionListener="#{estadoBean.imprimir}" />	
 					</f:facet>
 
 					<p:column headerText="Nome" sortBy="#{estado.nome}"
@@ -31,7 +34,7 @@
 					</p:column>
 
 					<p:column headerText="Opções">
-						<p:commandButton icon="ui-icon-trash"
+						<p:commandButton icon="ui-icon-trash" rendered="#{autenticacaoBean.temPermissoes(['A','G'])}"
 							actionListener="#{estadoBean.excluir}"
 							update=":mensagem :formListagem:tabela">
 							<p:confirm header="Confirmação"

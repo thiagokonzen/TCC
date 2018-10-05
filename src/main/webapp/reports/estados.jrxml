@@ -23,7 +23,12 @@ FROM tcc.estado]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement x="100" y="36" width="320" height="50" uuid="49d29ac0-303b-4b70-917d-0ecf33837b51"/>
+				<imageExpression><![CDATA["C:/Users/Tkonzen/NewWorkspace/TCC/src/main/webapp/resources/images/banner.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="42" splitType="Stretch">
@@ -47,15 +52,28 @@ FROM tcc.estado]]>
 				<text><![CDATA[Nome:
 ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="280" y="15" width="100" height="30" uuid="e8dad4ac-b1a4-49ae-9f39-9d395a0cd6fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4b604e89-e641-46a5-bd0c-813f6ae482c4"/>
+				</reportElement>
+				<text><![CDATA[Sigla
+]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
+		<band height="53" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="20" width="100" height="30" uuid="965ca5e1-05de-44ff-9ad8-77cf52f42660">
+				<reportElement x="0" y="0" width="140" height="30" uuid="965ca5e1-05de-44ff-9ad8-77cf52f42660">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="52c072fb-cc2c-43c9-b49f-b7334de1b857"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="30" uuid="a1372e86-9e47-4f2c-8d86-e2a7b263822d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4b604e89-e641-46a5-bd0c-813f6ae482c4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

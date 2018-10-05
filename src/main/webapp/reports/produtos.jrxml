@@ -39,7 +39,12 @@ ORDER BY tcc.produto.descricao DESC,
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="74" splitType="Stretch"/>
+		<band height="81" splitType="Stretch">
+			<image>
+				<reportElement x="133" y="10" width="277" height="50" uuid="74dc1b9e-6aa4-42ba-b4de-8280ab1e9f1e"/>
+				<imageExpression><![CDATA["C:/Users/Tkonzen/NewWorkspace/TCC/src/main/webapp/resources/images/banner.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="42" splitType="Stretch">
